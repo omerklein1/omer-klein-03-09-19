@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
+import FavoriteItem from './favoriteItem'
+import { connect } from 'react-redux'
 import './favorites.css'
 
 class Favorites extends Component {
 
-
-
-
     render() {
-        const { favorite } = this.props,
-        {data, city, id} = favorite,
-        { Temperature, WeatherText } = data[0]
-        return <div>
-            <p>{city}</p>
-            <p>{Temperature.Metric.Value}°C</p>
-            <p>{WeatherText}</p>
+        const { favoritesList } = this.props
+        return <div className="favorites">
+
+            {favoritesList.map(fav => <FavoriteItem favorite={fav} />)}
+
         </div>
     }
 }
 
-export default Favorites
+export default connect(state => ({
+    favoritesList: state.favoritesList
+}), {})(Favorites)

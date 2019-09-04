@@ -6,21 +6,21 @@
 }
 
 .searchList {
-    border: 1px solid;
-    width: 248px;
+    /* border: 1px solid; */
+    width: 250px;
     margin: auto;
     border-top: none;
     list-style-type: none;
     position: absolute;
-    top: 50px;
-    bottom: 0;
+    top: 125px;
     left: 0;
     right: 0;
     background-color: white;
 }
 
 .searchList li {
-    border-bottom: 1px solid;
+    border: 1px solid;
+    border-top: none;
     cursor: pointer;
 }
 .searchList li:hover {

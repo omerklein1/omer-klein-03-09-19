@@ -1,0 +1,28 @@
+.search {
+    width: 250px;
+    border: 1px solid;
+    height: 25px;
+    margin-top: 100px;
+}
+
+.searchList {
+    border: 1px solid;
+    width: 248px;
+    margin: auto;
+    border-top: none;
+    list-style-type: none;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+}
+
+.searchList li {
+    border-bottom: 1px solid;
+    cursor: pointer;
+}
+.searchList li:hover {
+    background-color: beige;
+}

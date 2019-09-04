@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    border: 1px solid;
+    position: fixed;
+    width: 100%;
+    background-color: aqua;
+}
+
+ .navbarItem {
+     margin: 15px;
+ }

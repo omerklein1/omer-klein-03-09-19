@@ -5,6 +5,7 @@
     flex-direction: column;
     height: 500px;
     justify-content: space-between;
+    background-image: linear-gradient(to bottom right,rgba(255,186,0,0.79),#61b3dd);
 }
 
 .weatherTop {

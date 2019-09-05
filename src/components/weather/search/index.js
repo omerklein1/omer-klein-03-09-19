@@ -2,193 +2,41 @@ import React, { Component } from 'react'
 import './search.css'
 
 class Search extends Component {
-    constructor() {
-        super()
+  constructor() {
+    super()
 
-        this.state = {
-            apikey: 'fGGvAwbDbJnHAb7LWYV3oyw8cB2Az8hR',
-            webSite: 'http://dataservice.accuweather.com'
-        }
+    this.state = {
+      // apikey: 'A3oFXg6338nmKAcmr03x4TAv8ZMrfI79',
+      // webSite: 'http://dataservice.accuweather.com'
     }
+  }
 
-    searchCity = async (e) => {
-        const text = e.target.value,
-            { apikey, webSite } = this.state
-        fetch(`${webSite}/locations/v1/cities/autocomplete?apikey=${apikey}&q=${text}&language=en-us`)
-            .then(res => res.json())
-            .then(res=> {
-                this.setState({ searchOptions: res })
-            })
-            .catch(error => {
-                console.log(error)
-            }
-            );
-    }
+  searchCity = async (e) => {
+    let text = e.target.value
+    const { apikey, webSite } = this.state
+    text = text.replace(/[^\x00-\x7F]/ig, '');
+    fetch(`${webSite}/locations/v1/cities/autocomplete?apikey=${apikey}&q=${text}&language=en-us`)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ searchOptions: res })
+      })
+      .catch(error => {
+        console.log(error)
+      }
+      );
+  }
 
 
-    render() {
-        const { searchOptions } = this.state,
-        { getWeatherByCityId } = this.props
-        return <div>
-            <input className="search" onChange={this.searchCity} type="search" placeholder="Search By City Name" />
-            {searchOptions ? <div className="searchList">
-            {searchOptions ? searchOptions.map(city=> <li key={city.Key} onClick={()=>{getWeatherByCityId(city.Key, city.LocalizedName); this.setState({searchOptions: ''})}}>{city.LocalizedName}</li>) : null}
-            </div> : null}
-        </div>
-    }
+  render() {
+    const { searchOptions } = this.state,
+      { getWeatherByCityId } = this.props
+    return <div>
+      <input className="search" onChange={this.searchCity} type="search" placeholder="Search By City Name" pattern="[A-Za-z]" title="Only english letters" />
+      {searchOptions ? <div className="searchList">
+        {searchOptions ? searchOptions.map(city => <li key={city.Key} onClick={() => { getWeatherByCityId(city.Key, city.LocalizedName); document.querySelector('input').value = ""; this.setState({ searchOptions: '' }) }}>{city.LocalizedName}</li>) : null}
+      </div> : null}
+    </div>
+  }
 }
 
 export default Search
-
-const searchTest = [
-    {
-      "Version": 1,
-      "Key": "208971",
-      "Type": "City",
-      "Rank": 10,
-      "LocalizedName": "Jakarta",
-      "Country": {
-        "ID": "ID",
-        "LocalizedName": "Indonesia"
-      },
-      "AdministrativeArea": {
-        "ID": "JK",
-        "LocalizedName": "Jakarta"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "106570",
-      "Type": "City",
-      "Rank": 11,
-      "LocalizedName": "Jinan",
-      "Country": {
-        "ID": "CN",
-        "LocalizedName": "China"
-      },
-      "AdministrativeArea": {
-        "ID": "SD",
-        "LocalizedName": "Shandong"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "205617",
-      "Type": "City",
-      "Rank": 11,
-      "LocalizedName": "Jaipur",
-      "Country": {
-        "ID": "IN",
-        "LocalizedName": "India"
-      },
-      "AdministrativeArea": {
-        "ID": "RJ",
-        "LocalizedName": "Rajasthan"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "305448",
-      "Type": "City",
-      "Rank": 11,
-      "LocalizedName": "Johannesburg",
-      "Country": {
-        "ID": "ZA",
-        "LocalizedName": "South Africa"
-      },
-      "AdministrativeArea": {
-        "ID": "GT",
-        "LocalizedName": "Gauteng"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "58189",
-      "Type": "City",
-      "Rank": 13,
-      "LocalizedName": "Jiangmen",
-      "Country": {
-        "ID": "CN",
-        "LocalizedName": "China"
-      },
-      "AdministrativeArea": {
-        "ID": "GD",
-        "LocalizedName": "Guangdong"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "58190",
-      "Type": "City",
-      "Rank": 13,
-      "LocalizedName": "Jieyang",
-      "Country": {
-        "ID": "CN",
-        "LocalizedName": "China"
-      },
-      "AdministrativeArea": {
-        "ID": "GD",
-        "LocalizedName": "Guangdong"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "59061",
-      "Type": "City",
-      "Rank": 13,
-      "LocalizedName": "Jiaozuo",
-      "Country": {
-        "ID": "CN",
-        "LocalizedName": "China"
-      },
-      "AdministrativeArea": {
-        "ID": "HA",
-        "LocalizedName": "Henan"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "59269",
-      "Type": "City",
-      "Rank": 13,
-      "LocalizedName": "Jingzhou",
-      "Country": {
-        "ID": "CN",
-        "LocalizedName": "China"
-      },
-      "AdministrativeArea": {
-        "ID": "HB",
-        "LocalizedName": "Hubei"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "61618",
-      "Type": "City",
-      "Rank": 13,
-      "LocalizedName": "Jiaxing",
-      "Country": {
-        "ID": "CN",
-        "LocalizedName": "China"
-      },
-      "AdministrativeArea": {
-        "ID": "ZJ",
-        "LocalizedName": "Zhejiang"
-      }
-    },
-    {
-      "Version": 1,
-      "Key": "61619",
-      "Type": "City",
-      "Rank": 13,
-      "LocalizedName": "Jinhua",
-      "Country": {
-        "ID": "CN",
-        "LocalizedName": "China"
-      },
-      "AdministrativeArea": {
-        "ID": "ZJ",
-        "LocalizedName": "Zhejiang"
-      }
-    }
-  ]

@@ -20,7 +20,7 @@ class FavoriteItem extends Component {
     
 
     getTheCurrentWeather =  (cityId, name) => {
-        const apikey = 'fGGvAwbDbJnHAb7LWYV3oyw8cB2Az8hR',
+        const apikey = 'A3oFXg6338nmKAcmr03x4TAv8ZMrfI79',
             webSite = 'http://dataservice.accuweather.com'
          axios.get(`${webSite}/currentconditions/v1/${cityId}?apikey=${apikey}&language=en-us&details=false`)
             .then(res => {
@@ -42,7 +42,7 @@ class FavoriteItem extends Component {
          {<div className="favItem" id={id}>
             <div className="favCity">
                 <p>{name}</p>
-                <p>{Temperature.Metric.Value}°C</p>
+                <p>{Temperature? Temperature.Metric.Value : 'טוען'}°C</p>
             </div>
             <p className="favText">{WeatherText}</p>
         </div>}

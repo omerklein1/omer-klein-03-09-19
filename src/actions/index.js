@@ -13,7 +13,7 @@
 //             dispatch({ payload: error.message, type: 'DATA_ERROR' })}
 //         );
 // }
-const apikey = 'fGGvAwbDbJnHAb7LWYV3oyw8cB2Az8hR',
+const apikey = 'A3oFXg6338nmKAcmr03x4TAv8ZMrfI79',
     webSite = 'http://dataservice.accuweather.com'
 
 

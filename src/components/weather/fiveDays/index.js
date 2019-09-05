@@ -3,15 +3,17 @@ import { connect } from 'react-redux'
 import './fiveDays.css'
 
 class FiveDays extends Component {
-  
+    getBG = day => {
+
+    }
     render() {
-        const { fiveDays } = this.props,
+        const { fiveDays, celsius } = this.props,
             { DailyForecasts } = fiveDays
 
         return <div className="fiveDays">
-            {DailyForecasts ? DailyForecasts.map(day => <div className="dayItem" key={new Date(day.Date).toDateString().slice(0, 3)}>
+            {DailyForecasts ? DailyForecasts.map(day => <div className={`dayItem ${this.getBG(day)}`} key={new Date(day.Date).toDateString().slice(0, 3)}>
                 <p>{new Date(day.Date).toDateString().slice(0, 3)}</p>
-                <p>{day.Temperature.Minimum.Value}°C</p>
+                {celsius ? <p>{day.Temperature.Minimum.Value}°C</p> : <p>{(Number(day.Temperature.Minimum.Value) * 9 / 5 + 32).toFixed(2)}°F</p>}
             </div>) : null}
         </div>
 
@@ -19,6 +21,7 @@ class FiveDays extends Component {
 }
 
 export default connect(state => ({
-    fiveDays: state.fiveDays
-}), { })(FiveDays)
+    fiveDays: state.fiveDays,
+    celsius: state.celsius
+}), {})(FiveDays)
 

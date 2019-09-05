@@ -4,5 +4,12 @@
     height: 200px;
     margin: auto;
     display: grid;
-    font-weight: bold
+    font-weight: bold;
+    display: grid;
+    font-weight: bold;
+    background: #03A9F4;
+    box-shadow: 1px 1px 8px 1px #0000002b;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
 }

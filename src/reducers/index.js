@@ -3,13 +3,17 @@ import currentWeather from './currentWeather'
 import openFavorites from './openFavorites'
 import favoritesList from './favoritesList'
 import fiveDays from './fiveDays'
+import celsius from './celsius'
+import light from './light'
 
 
-const allReducers =combineReducers({
+const allReducers = combineReducers({
     currentWeather,
     fiveDays,
     openFavorites,
-    favoritesList
+    favoritesList,
+    celsius,
+    light
 })
 
 export default allReducers

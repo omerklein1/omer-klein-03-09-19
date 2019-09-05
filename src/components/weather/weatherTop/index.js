@@ -9,8 +9,12 @@ class WeatherTop extends Component {
       alreadyInTheList: false
     }
   }
-
   componentDidMount() {
+    this.alreadyInTheList()
+  }
+
+
+  alreadyInTheList = () => {
     const { currentWeather } = this.props,
       { id } = currentWeather
     const favorites = JSON.parse(localStorage.getItem('favorites'))
@@ -19,7 +23,6 @@ class WeatherTop extends Component {
       if (alreadyInTheList) return this.setState({ alreadyInTheList: true })
     }
   }
-
 
 
   addToFavorites = (id, city) => {
@@ -31,36 +34,39 @@ class WeatherTop extends Component {
     } else {
       localStorage.setItem('favorites', JSON.stringify([[id, city]]))
     }
-    this.setState({alreadyInTheList: true})
+    this.setState({ alreadyInTheList: true })
   }
 
   delFromFavorites = (id) => {
     const favorites = JSON.parse(localStorage.getItem('favorites'))
     const favAfterDel = favorites.filter(fav => fav[0] !== id)
     localStorage.setItem('favorites', JSON.stringify(favAfterDel))
-    this.setState({alreadyInTheList: false})
+    this.setState({ alreadyInTheList: false })
   }
 
 
   render() {
-    const { currentWeather } = this.props,
+    const { currentWeather, celsius } = this.props,
       { data, city, id } = currentWeather,
-      { Temperature } = data[0],
+      { Temperature, WeatherIcon } = data[0],
       { alreadyInTheList } = this.state
-
 
     return <div className="weatherTop">
       <div className="whetherNow">
-        <img className="weatherTopPic" src="http://weather.ynet.co.il/fb/fb.jpg" alt="weather-pic" />
-        <div><p className="cityName">{city}</p><p>{Temperature.Metric.Value}°C</p></div>
-      </div>
-      {alreadyInTheList? <button className="weatherTopBtn" onClick={() => this.delFromFavorites(id, city)}>Delete from favorites</button> :
-      <button className="weatherTopBtn" onClick={() => this.addToFavorites(id, city)}>Add to favorites</button>}
+        <img className="weatherTopPic" src={`https://www.accuweather.com/images/weathericons/${WeatherIcon}.svg`} alt="weather-pic" />
+        <div>
+          <p className="cityName">{city}</p>
+          {celsius ? <p>{Temperature.Metric.Value}°C</p> : <p>{(Number(Temperature.Metric.Value) * 9 / 5 + 32).toFixed(2)}°F</p>}
         </div>
+      </div>
+      {alreadyInTheList ? <button className="weatherTopBtn" onClick={() => this.delFromFavorites(id, city)}>Delete from favorites</button> :
+        <button className="weatherTopBtn" onClick={() => this.addToFavorites(id, city)}>Add to favorites</button>}
+    </div>
   }
 }
 
 export default connect(state => ({
-  currentWeather: state.currentWeather
+  currentWeather: state.currentWeather,
+  celsius: state.celsius
 }), {})(WeatherTop)
 

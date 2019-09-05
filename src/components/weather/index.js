@@ -18,13 +18,13 @@ class Weather extends Component {
 
 
   render() {
-    const { currentWeather } = this.props,
+    const { currentWeather, light } = this.props,
       { data } = currentWeather,
       { WeatherText } = data[0]
 
     return <>
       <Search getWeatherByCityId={this.getWeatherByCityId} />
-      <div className="weather">
+      <div className={`weather ${light ? null : 'dark'}`}>
         <WeatherTop />
         <h1>{WeatherText}</h1>
         <FiveDays />
@@ -35,6 +35,7 @@ class Weather extends Component {
 
 export default connect(state => ({
   currentWeather: state.currentWeather,
-  fiveDays: state.fiveDays
+  fiveDays: state.fiveDays,
+  light: state.light
 }), { getTheCurrentWeather, getFiveDays })(Weather)
 

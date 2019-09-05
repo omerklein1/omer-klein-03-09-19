@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { apikey, webSite } from '../../../config'
 import './search.css'
 
 class Search extends Component {
@@ -6,14 +7,11 @@ class Search extends Component {
     super()
 
     this.state = {
-      // apikey: 'A3oFXg6338nmKAcmr03x4TAv8ZMrfI79',
-      // webSite: 'http://dataservice.accuweather.com'
     }
   }
 
   searchCity = async (e) => {
     let text = e.target.value
-    const { apikey, webSite } = this.state
     text = text.replace(/[^\x00-\x7F]/ig, '');
     fetch(`${webSite}/locations/v1/cities/autocomplete?apikey=${apikey}&q=${text}&language=en-us`)
       .then(res => res.json())

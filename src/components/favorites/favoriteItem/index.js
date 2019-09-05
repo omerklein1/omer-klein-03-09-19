@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { apikey, webSite } from '../../../config'
 import axios from 'axios'
 import './favoriteItem.css'
 
@@ -13,43 +14,41 @@ class FavoriteItem extends Component {
 
     componentDidMount() {
         const { favorite } = this.props,
-        id = favorite[0], name = favorite[1]
+            id = favorite[0], name = favorite[1]
         this.getTheCurrentWeather(id, name);
-      }
-    
-    
+    }
 
-    getTheCurrentWeather =  (cityId, name) => {
-        const apikey = 'A3oFXg6338nmKAcmr03x4TAv8ZMrfI79',
-            webSite = 'http://dataservice.accuweather.com'
-         axios.get(`${webSite}/currentconditions/v1/${cityId}?apikey=${apikey}&language=en-us&details=false`)
+
+
+    getTheCurrentWeather = (cityId, name) => {
+        axios.get(`${webSite}/currentconditions/v1/${cityId}?apikey=${apikey}&language=en-us&details=false`)
             .then(res => {
                 this.setState({ currentWeather: res.data[0] })
             })
             .catch(error => {
-               console.log(error.message)
+                console.log(error.message)
             }
             );
     }
 
     render() {
         const { currentWeather } = this.state,
-         { favorite } = this.props,
-        id = favorite[0], name = favorite[1],
-        { Temperature, WeatherText } = currentWeather
+            { favorite, getWeatherByCityId, celsius } = this.props,
+            id = favorite[0], name = favorite[1],
+            { Temperature, WeatherText } = currentWeather
         console.log(currentWeather)
-        return <>
-         {<div className="favItem" id={id}>
+
+        return <div className="favItem" id={id} onClick={() => getWeatherByCityId(id, name)}>
             <div className="favCity">
                 <p>{name}</p>
-                <p>{Temperature? Temperature.Metric.Value : 'טוען'}°C</p>
+                {celsius ? <p>{Temperature ? Temperature.Metric.Value : 'טוען'}°C</p> : <p>{(Number(Temperature.Metric.Value) * 9 / 5 + 32).toFixed(2)}°F</p>}
             </div>
             <p className="favText">{WeatherText}</p>
-        </div>}
-        </>
+        </div>
     }
 }
 
 export default connect(state => ({
-}), {  })(FavoriteItem)
+    celsius: state.celsius
+}), {})(FavoriteItem)
 

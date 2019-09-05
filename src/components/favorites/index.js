@@ -1,23 +1,18 @@
 import React, { Component } from 'react'
 import FavoriteItem from './favoriteItem'
 import { connect } from 'react-redux'
-import axios from 'axios'
+import { changeHome } from '../../actions'
+import { getTheCurrentWeather } from '../../actions'
+import { getFiveDays } from '../../actions'
 import './favorites.css'
 
 class Favorites extends Component {
 
-    getTheCurrentWeather =  (cityId, name) => {
-        const apikey = 'A3oFXg6338nmKAcmr03x4TAv8ZMrfI79',
-            webSite = 'http://dataservice.accuweather.com'
-         axios.get(`${webSite}/currentconditions/v1/${cityId}?apikey=${apikey}&language=en-us&details=false`)
-            .then(res => {
-                return 
-                // this.setState({ currentWeather: res.data[0] })
-            })
-            .catch(error => {
-               console.log(error.message)
-            }
-            );
+    getWeatherByCityId = async (cityId, name) => {
+        const { getTheCurrentWeather, getFiveDays, changeHome } = this.props
+        changeHome()
+        getTheCurrentWeather(cityId, name)
+        getFiveDays(cityId)
     }
 
     render() {
@@ -25,7 +20,7 @@ class Favorites extends Component {
 
         return <div className="favorites">
 
-            {favoritesList.map(favorite => <FavoriteItem favorite={favorite} />)}
+            {favoritesList.map(favorite => <FavoriteItem getWeatherByCityId={this.getWeatherByCityId} favorite={favorite} />)}
 
         </div>
     }
@@ -33,4 +28,4 @@ class Favorites extends Component {
 
 export default connect(state => ({
     favoritesList: state.favoritesList
-}), {})(Favorites)
+}), { getTheCurrentWeather, getFiveDays, changeHome })(Favorites)

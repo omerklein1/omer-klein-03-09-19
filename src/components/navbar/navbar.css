@@ -2,13 +2,17 @@
     display: flex;
     justify-content: space-between;
     height: 60px;
-    border: 1px solid;
-    position: fixed;
     top: 0;
     width: 100%;
-    background-color: aqua;
+    background: white;
+    box-shadow: 1px 1px 8px 1px #0000002b;
 }
 
- .navbarItem {
-     margin: 15px;
- }
+.navbarItem {
+    margin: 15px;
+}
+
+.mark {
+    background-color: #F44336;
+    transform: scale(1.2)
+}

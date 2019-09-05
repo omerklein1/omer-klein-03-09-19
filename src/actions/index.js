@@ -13,7 +13,7 @@
 //             dispatch({ payload: error.message, type: 'DATA_ERROR' })}
 //         );
 // }
-const apikey = 'yxA1s4JrJ2XJWo2YOcdUfqOY7Wi7Mk8y',
+const apikey = 'fGGvAwbDbJnHAb7LWYV3oyw8cB2Az8hR',
     webSite = 'http://dataservice.accuweather.com'
 
 
@@ -52,20 +52,19 @@ export const getFiveDays = (cityId) => async dispatch => {
 export const changeHome = (openFavorites) => dispatch => {
     dispatch({
         type: 'CHANGE_HOME_STATE',
-        payload: !openFavorites
+        payload: false
     })
 }
 
 export const getFavoritesList = (openFavorites) => async dispatch => {
     const favoritesList = await JSON.parse(localStorage.getItem('favorites'))
-    consol.log('אני כאן')
     dispatch({
         type: 'FAVORITES_LIST_READER',
         payload: favoritesList
     })
     dispatch({
         type: 'CHANGE_HOME_STATE',
-        payload: false
+        payload: true
     })
 }
 

@@ -1,15 +1,31 @@
 import React, { Component } from 'react'
 import FavoriteItem from './favoriteItem'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import './favorites.css'
 
 class Favorites extends Component {
 
+    getTheCurrentWeather =  (cityId, name) => {
+        const apikey = 'fGGvAwbDbJnHAb7LWYV3oyw8cB2Az8hR',
+            webSite = 'http://dataservice.accuweather.com'
+         axios.get(`${webSite}/currentconditions/v1/${cityId}?apikey=${apikey}&language=en-us&details=false`)
+            .then(res => {
+                return 
+                // this.setState({ currentWeather: res.data[0] })
+            })
+            .catch(error => {
+               console.log(error.message)
+            }
+            );
+    }
+
     render() {
         const { favoritesList } = this.props
+
         return <div className="favorites">
 
-            {favoritesList.map(fav => <FavoriteItem favorite={fav} />)}
+            {favoritesList.map(favorite => <FavoriteItem favorite={favorite} />)}
 
         </div>
     }

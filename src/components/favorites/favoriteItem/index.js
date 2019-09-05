@@ -1,21 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import './favoriteItem.css'
 
 class FavoriteItem extends Component {
     constructor() {
         super()
         this.state = {
+            currentWeather: []
         }
     }
 
-    getTheCurrentWeather = async (cityId, name) => {
-        const apikey = 'yxA1s4JrJ2XJWo2YOcdUfqOY7Wi7Mk8y',
+    componentDidMount() {
+        const { favorite } = this.props,
+        id = favorite[0], name = favorite[1]
+        this.getTheCurrentWeather(id, name);
+      }
+    
+    
+
+    getTheCurrentWeather =  (cityId, name) => {
+        const apikey = 'fGGvAwbDbJnHAb7LWYV3oyw8cB2Az8hR',
             webSite = 'http://dataservice.accuweather.com'
-        await fetch(`${webSite}/currentconditions/v1/${cityId}?apikey=${apikey}&language=en-us&details=false`)
-            .then(res => res.json())
+         axios.get(`${webSite}/currentconditions/v1/${cityId}?apikey=${apikey}&language=en-us&details=false`)
             .then(res => {
-                this.setState({ currentWeather: { data: res, city: name, id: cityId } })
+                this.setState({ currentWeather: res.data[0] })
             })
             .catch(error => {
                console.log(error.message)
@@ -24,21 +33,19 @@ class FavoriteItem extends Component {
     }
 
     render() {
-        const { favorite } = this.props
-        // this.getTheCurrentWeather(favorite[0], favorite[1])
-        
-        const { currentWeather } = this.state
-        console.log(favorite)
-            // const { data, city, id } = currentWeather,
-            // { Temperature, WeatherText } = data[0]
-
-        return <> {/* <div className="favItem" id={id}>
+        const { currentWeather } = this.state,
+         { favorite } = this.props,
+        id = favorite[0], name = favorite[1],
+        { Temperature, WeatherText } = currentWeather
+        console.log(currentWeather)
+        return <>
+         {<div className="favItem" id={id}>
             <div className="favCity">
-                <p>{city}</p>
+                <p>{name}</p>
                 <p>{Temperature.Metric.Value}°C</p>
             </div>
             <p className="favText">{WeatherText}</p>
-        </div> */}
+        </div>}
         </>
     }
 }

@@ -35,7 +35,6 @@ class Weather extends Component {
       { data = [1] } = currentWeather,
       { WeatherText = '' } = data[0]
 
-    console.log(currentWeather)
     return currentWeather ? <>
       <Search getWeatherByCityId={this.getWeatherByCityId} />
       <div className={`weather ${light ? null : 'dark'}`}>

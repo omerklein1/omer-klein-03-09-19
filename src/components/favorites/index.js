@@ -18,11 +18,11 @@ class Favorites extends Component {
     render() {
         const { favoritesList, light } = this.props
 
-        return <div className={`favorites ${light ? null : 'dark'}`}>
+        return favoritesList ? <div className={`favorites ${light ? null : 'dark'}`}>
 
             {favoritesList.map(favorite => <FavoriteItem getWeatherByCityId={this.getWeatherByCityId} favorite={favorite} />)}
 
-        </div>
+        </div> : <h1>Favorites list is empty</h1>
     }
 }
 

@@ -36,7 +36,6 @@ class FavoriteItem extends Component {
             { favorite, getWeatherByCityId, celsius } = this.props,
             id = favorite[0], name = favorite[1],
             { Temperature, WeatherText } = currentWeather
-        console.log(currentWeather)
 
         return <div className="favItem" id={id} onClick={() => getWeatherByCityId(id, name)}>
             <div className="favCity">

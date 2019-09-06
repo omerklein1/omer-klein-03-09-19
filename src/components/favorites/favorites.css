@@ -1,4 +1,6 @@
 .favorites {
     display: flex;
     margin-top: 100px;
+    padding: 15px;
+    margin: 100px 22px;
 }

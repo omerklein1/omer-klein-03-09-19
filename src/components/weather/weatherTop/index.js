@@ -47,8 +47,8 @@ class WeatherTop extends Component {
 
   render() {
     const { currentWeather, celsius } = this.props,
-      { data, city, id } = currentWeather,
-      { Temperature, WeatherIcon } = data[0],
+      { data = [1], city, id } = currentWeather,
+      { Temperature = { Metric: { Value: '' } }, WeatherIcon = '' } = data[0],
       { alreadyInTheList } = this.state
 
     return <div className="weatherTop">

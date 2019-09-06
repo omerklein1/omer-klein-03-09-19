@@ -16,9 +16,9 @@ class Favorites extends Component {
     }
 
     render() {
-        const { favoritesList } = this.props
+        const { favoritesList, light } = this.props
 
-        return <div className="favorites">
+        return <div className={`favorites ${light ? null : 'dark'}`}>
 
             {favoritesList.map(favorite => <FavoriteItem getWeatherByCityId={this.getWeatherByCityId} favorite={favorite} />)}
 
@@ -27,5 +27,6 @@ class Favorites extends Component {
 }
 
 export default connect(state => ({
-    favoritesList: state.favoritesList
+    favoritesList: state.favoritesList,
+    light: state.light
 }), { getTheCurrentWeather, getFiveDays, changeHome })(Favorites)

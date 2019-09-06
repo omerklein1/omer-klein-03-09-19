@@ -49,6 +49,6 @@ class FavoriteItem extends Component {
 }
 
 export default connect(state => ({
-    celsius: state.celsius
+    celsius: state.celsius,
 }), {})(FavoriteItem)
 

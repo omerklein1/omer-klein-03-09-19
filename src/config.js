@@ -1,3 +1,3 @@
-export const apikey = 'yxA1s4JrJ2XJWo2YOcdUfqOY7Wi7Mk8y'
+export const apikey = 'fGGvAwbDbJnHAb7LWYV3oyw8cB2Az8hR'
 export const webSite = 'http://dataservice.accuweather.com'
 

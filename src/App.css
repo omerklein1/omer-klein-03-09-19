@@ -20,4 +20,8 @@ button {
   .fiveDays {
     flex-wrap: wrap;
   }
+
+  .changeBtn {
+    display: block;
+  }
 }

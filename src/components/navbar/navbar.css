@@ -10,9 +10,14 @@
 
 .navbarItem {
     margin: 15px;
+    display: inline-block;
 }
 
 .mark {
     background-color: #F44336;
     transform: scale(1.2)
+}
+
+.changeBtn {
+    display: inline;
 }

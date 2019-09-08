@@ -23,5 +23,26 @@ button {
 
   .changeBtn {
     display: block;
+    position: absolute;
+    top: 4px;
+  }
+
+  .homeFav {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    margin: 0;
+  }
+
+  .mobileNav {
+    display: block;
+  }
+
+  .navbar {
+    display: block;
+  }
+
+  .searchList {
+    top: 158px;
   }
 }

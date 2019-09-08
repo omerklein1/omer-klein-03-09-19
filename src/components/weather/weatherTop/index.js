@@ -12,15 +12,24 @@ class WeatherTop extends Component {
   componentDidMount() {
     this.alreadyInTheList()
   }
-
+  componentDidUpdate() {
+    const { currentWeather } = this.props,
+      { id } = this.state
+    if (id !== currentWeather.id) {
+      this.alreadyInTheList()
+    }
+  }
 
   alreadyInTheList = () => {
     const { currentWeather } = this.props,
       { id } = currentWeather
+    this.setState({ id: id })
+    console.log(this.state.id)
     const favorites = JSON.parse(localStorage.getItem('favorites'))
     if (favorites) {
       let alreadyInTheList = favorites.find(item => item[0] === id)
       if (alreadyInTheList) return this.setState({ alreadyInTheList: true })
+      else return this.setState({ alreadyInTheList: false })
     }
   }
 
@@ -51,12 +60,13 @@ class WeatherTop extends Component {
       { Temperature = { Metric: { Value: '' } }, WeatherIcon = '' } = data[0],
       { alreadyInTheList } = this.state
 
+
     return <div className="weatherTop">
       <div className="whetherNow">
         <img className="weatherTopPic" src={`https://www.accuweather.com/images/weathericons/${WeatherIcon}.svg`} alt="weather-pic" />
         <div>
           <p className="cityName">{city}</p>
-          {celsius ? <p>{Temperature.Metric.Value}°C</p> : <p>{(Number(Temperature.Metric.Value) * 9 / 5 + 32).toFixed(2)}°F</p>}
+          {celsius ? <p>{Temperature.Metric.Value}°C</p> : <p>{(Number(Temperature.Metric.Value) * 9 / 5 + 32).toFixed(1)}°F</p>}
         </div>
       </div>
       {alreadyInTheList ? <button className="weatherTopBtn" onClick={() => this.delFromFavorites(id, city)}>Delete from favorites</button> :

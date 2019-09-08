@@ -10,25 +10,23 @@ class Navbar extends Component {
 
     render() {
         const { getFavoritesList, openFavorites, changeHome, celsius, convertTheTemp, light, changeTheLight } = this.props
-        return <div className={`navbar ${light ? null : 'dark'}`}>
-            <div >
-                <h3 className="navbarItem">Herolo Weather Task</h3>
-                <div className="changeBtn">
-                    <button className="" onClick={() => convertTheTemp(celsius)}>{celsius ? '°C' : '°F'}</button>
-                    <button className={light ? 'dark' : 'light'} onClick={() => changeTheLight(light)}>{light ? 'light' : 'dark'}</button>
+        return <>
+            <div className="mobileNav"></div>
+            <div className={`navbar ${light ? null : 'dark'}`}>
+                <div >
+                    <h3 className="navbarItem">Herolo Weather Task</h3>
+                    <div className="changeBtn">
+                        <button className="" onClick={() => convertTheTemp(celsius)}>{celsius ? '°C' : '°F'}</button>
+                        <button className={light ? 'dark' : 'light'} onClick={() => changeTheLight(light)}>{light ? 'light' : 'dark'}</button>
+                    </div>
+                </div>
+
+                <div className="navbarItem homeFav">
+                    <button className={openFavorites ? "" : "mark"} onClick={() => changeHome()}>Home</button>
+                    <button className={openFavorites ? "mark" : ""} onClick={() => getFavoritesList()}>Favorites</button>
                 </div>
             </div>
-
-            <div>
-
-            </div>
-
-            <div className="navbarItem">
-
-                <button className={openFavorites ? "" : "mark"} onClick={() => changeHome()}>Home</button>
-                <button className={openFavorites ? "mark" : ""} onClick={() => getFavoritesList()}>Favorites</button>
-            </div>
-        </div>
+        </>
     }
 }
 

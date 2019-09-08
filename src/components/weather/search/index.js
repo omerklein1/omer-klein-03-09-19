@@ -13,6 +13,7 @@ class Search extends Component {
   searchCity = async (e) => {
     let text = e.target.value
     text = text.replace(/[^\x00-\x7F]/ig, '');
+    if (text == '') this.setState({ searchOptions: '' })
     fetch(`${webSite}/locations/v1/cities/autocomplete?apikey=${apikey}&q=${text}&language=en-us`)
       .then(res => res.json())
       .then(res => {

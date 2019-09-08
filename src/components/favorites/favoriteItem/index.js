@@ -40,7 +40,7 @@ class FavoriteItem extends Component {
         return <div className="favItem" id={id} onClick={() => getWeatherByCityId(id, name)}>
             <div className="favCity">
                 <p>{name}</p>
-                {celsius ? <p>{Temperature ? Temperature.Metric.Value : 'טוען'}°C</p> : <p>{(Number(Temperature.Metric.Value) * 9 / 5 + 32).toFixed(2)}°F</p>}
+                {celsius ? <p>{Temperature ? Temperature.Metric.Value : 'טוען'}°C</p> : <p>{(Number(Temperature.Metric.Value) * 9 / 5 + 32).toFixed(1)}°F</p>}
             </div>
             <p className="favText">{WeatherText}</p>
         </div>

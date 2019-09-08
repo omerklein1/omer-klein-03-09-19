@@ -21,3 +21,9 @@
 .changeBtn {
     display: inline;
 }
+
+.mobileNav {
+    height: 35px;
+    background: #33475b;
+    display: none;
+}
